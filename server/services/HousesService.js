@@ -1,3 +1,4 @@
+import { contentSecurityPolicy } from "helmet"
 import { dbContext } from "../db/DbContext.js"
 
 
@@ -23,15 +24,17 @@ class HousesService {
   }
 
   async updateHouse(houseId, houseInfo) {
-    const originalHouse = await this.fetchHouseById(houseId)
-    originalHouse.squareFootage = houseInfo.squareFootage ? houseInfo.squareFootage : originalHouse.squareFootage
-    originalHouse.price = houseInfo.price ? houseInfo.price : originalHouse.price
-    originalHouse.yearBuilt = houseInfo.yearBuilt ? houseInfo.yearBuilt : originalHouse.yearBuilt
-    originalHouse.floors = houseInfo.floors ? houseInfo.floors : originalHouse.floors
-    originalHouse.description = houseInfo.description ? houseInfo.description : originalHouse.description
+    const updatedHouse = await dbContext.Houses.findByIdAndUpdate(houseId, houseInfo, { returnDocument: 'after' })
+    return updatedHouse
+    // const originalHouse = await this.fetchHouseById(houseId)
+    // originalHouse.squareFootage = houseInfo.squareFootage ? houseInfo.squareFootage : originalHouse.squareFootage
+    // originalHouse.price = houseInfo.price ? houseInfo.price : originalHouse.price
+    // originalHouse.yearBuilt = houseInfo.yearBuilt ? houseInfo.yearBuilt : originalHouse.yearBuilt
+    // originalHouse.floors = houseInfo.floors ? houseInfo.floors : originalHouse.floors
+    // originalHouse.description = houseInfo.description ? houseInfo.description : originalHouse.description
 
-    await originalHouse.save()
-    return originalHouse
+    // await originalHouse.save()
+    // return originalHouse
   }
 }
 

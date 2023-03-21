@@ -22,15 +22,18 @@ class JobsService {
   }
 
   async updateJob(jobId, jobInfo) {
-    const originalJob = await this.fetchById(jobId)
+    const job = await dbContext.Jobs.findByIdAndUpdate(jobId, jobInfo, { returnDocument: 'after' })
+    return job
 
-    originalJob.position = jobInfo.position ? jobInfo.position : originalJob.position
-    originalJob.company = jobInfo.company ? jobInfo.company : originalJob.company
-    originalJob.description = jobInfo.description ? jobInfo.description : originalJob.description
-    originalJob.salary = jobInfo.salary ? jobInfo.salary : originalJob.salary
+    // const originalJob = await this.fetchById(jobId)
 
-    await originalJob.save()
-    return originalJob
+    // originalJob.position = jobInfo.position ? jobInfo.position : originalJob.position
+    // originalJob.company = jobInfo.company ? jobInfo.company : originalJob.company
+    // originalJob.description = jobInfo.description ? jobInfo.description : originalJob.description
+    // originalJob.salary = jobInfo.salary ? jobInfo.salary : originalJob.salary
+
+    // await originalJob.save()
+    // return originalJob
   }
 
   async deleteJob(jobId) {
