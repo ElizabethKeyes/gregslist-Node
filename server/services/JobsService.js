@@ -3,8 +3,8 @@ import { dbContext } from "../db/DbContext.js"
 
 class JobsService {
 
-  async fetchAllJobs() {
-    const jobs = await dbContext.Jobs.find()
+  async fetchAllJobs(query) {
+    const jobs = await dbContext.Jobs.find(query)
     if (!jobs.length) {
       throw new Error("There are no jobs to display")
     }

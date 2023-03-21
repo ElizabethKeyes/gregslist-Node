@@ -16,7 +16,8 @@ export class HousesController extends BaseController {
 
   async fetchAllHouses(req, res, next) {
     try {
-      const houses = await housesService.fetchAllHouses()
+      const query = req.query
+      const houses = await housesService.fetchAllHouses(query)
       res.send(houses)
     } catch (error) {
       next(error)

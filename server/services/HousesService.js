@@ -3,8 +3,8 @@ import { dbContext } from "../db/DbContext.js"
 
 class HousesService {
 
-  async fetchAllHouses() {
-    const houses = await dbContext.Houses.find()
+  async fetchAllHouses(query) {
+    const houses = await dbContext.Houses.find(query)
     return houses
   }
 
